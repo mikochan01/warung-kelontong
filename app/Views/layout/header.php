@@ -25,6 +25,16 @@
             Logout
         </a>
 
+        <a href="/produk"
+            class="btn btn-outline-light btn-sm">
+            Produk
+        </a>
+
+        <a href="/kategori"
+            class="btn btn-outline-light btn-sm">
+            Kategori
+        </a>
+
     </div>
 
 </nav>

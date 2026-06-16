@@ -17,3 +17,5 @@ $routes->get('/login', 'Login::index');
 $routes->post('/login/auth', 'Login::auth');
 $routes->get('/logout', 'Login::logout');
 $routes->get('/test', 'Test::index');
+
+$routes->get('/kategori', 'Kategori::index', ['filter' => 'auth']);
