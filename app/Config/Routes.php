@@ -24,3 +24,7 @@ $routes->post('/kategori/simpan', 'Kategori::simpan', ['filter' => 'auth']);
 $routes->get('/kategori/edit/(:num)', 'Kategori::edit/$1', ['filter' => 'auth']);
 $routes->post('/kategori/update/(:num)', 'Kategori::update/$1', ['filter' => 'auth']);
 $routes->get('/kategori/hapus/(:num)', 'Kategori::hapus/$1', ['filter' => 'auth']);
+
+$routes->get('/barang-masuk', 'BarangMasuk::index', ['filter' => 'auth']);
+$routes->get('/barang-masuk/tambah', 'BarangMasuk::tambah', ['filter' => 'auth']);
+$routes->post('/barang-masuk/simpan', 'BarangMasuk::simpan', ['filter' => 'auth']);

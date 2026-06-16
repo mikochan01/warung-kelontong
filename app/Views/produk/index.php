@@ -16,6 +16,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama Produk</th>
+                <th>Kategori</th>
                 <th>Harga Jual</th>
                 <th>Stok</th>
                 <th>Aksi</th>
@@ -33,15 +34,13 @@
             <td><?= $no++ ?></td>
 
             <td><?= $p['nama_produk'] ?></td>
-
+            <td><?= $p['nama_kategori'] ?></td>
             <td>
                 Rp <?= number_format($p['harga_jual'],0,',','.') ?>
             </td>
-
             <td><?= $p['stok'] ?></td>
 
             <td>
-
                 <a href="/produk/edit/<?= $p['id'] ?>"
                    class="btn btn-warning btn-sm">
                     Edit
@@ -52,7 +51,6 @@
                    onclick="return confirm('Yakin hapus?')">
                     Hapus
                 </a>
-
             </td>
 
         </tr>

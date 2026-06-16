@@ -35,6 +35,11 @@
             Kategori
         </a>
 
+        <a href="/barang-masuk"
+            class="btn btn-outline-light btn-sm">
+            Barang Masuk
+        </a>
+
     </div>
 
 </nav>

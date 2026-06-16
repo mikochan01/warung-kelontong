@@ -11,8 +11,10 @@ class Produk extends BaseController
     {
         $model = new ProdukModel();
 
-        $data['produk'] = $model->findAll();
-
+        $data['produk'] = $model
+            ->select('produk.*, kategori.nama_kategori')
+            ->join('kategori', 'kategori.id = produk.kategori_id', 'left')
+            ->findAll();
         return view('produk/index', $data);
     }
 
