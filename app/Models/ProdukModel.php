@@ -10,6 +10,7 @@ class ProdukModel extends Model
 
     protected $allowedFields = [
         'nama_produk',
+        'kategori_id',
         'harga_beli',
         'harga_jual',
         'stok'

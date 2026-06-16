@@ -18,6 +18,33 @@
 
         <div class="mb-3">
 
+            <label class="form-label">
+            Kategori
+            </label>
+
+            <select
+            name="kategori_id"
+            class="form-control"
+            required>
+
+            <option value="">
+            -- Pilih Kategori --
+            </option>
+
+            <?php foreach($kategori as $k): ?>
+
+                <option value="<?= $k['id'] ?>">
+                    <?= $k['nama_kategori'] ?>
+                </option>
+
+            <?php endforeach; ?>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
             <label>Harga Beli</label>
 
             <input

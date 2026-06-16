@@ -19,3 +19,8 @@ $routes->get('/logout', 'Login::logout');
 $routes->get('/test', 'Test::index');
 
 $routes->get('/kategori', 'Kategori::index', ['filter' => 'auth']);
+$routes->get('/kategori/tambah', 'Kategori::tambah', ['filter' => 'auth']);
+$routes->post('/kategori/simpan', 'Kategori::simpan', ['filter' => 'auth']);
+$routes->get('/kategori/edit/(:num)', 'Kategori::edit/$1', ['filter' => 'auth']);
+$routes->post('/kategori/update/(:num)', 'Kategori::update/$1', ['filter' => 'auth']);
+$routes->get('/kategori/hapus/(:num)', 'Kategori::hapus/$1', ['filter' => 'auth']);
