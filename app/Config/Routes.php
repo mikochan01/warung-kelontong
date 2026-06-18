@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('/produk', 'Produk::index', ['filter' => 'auth']);
 $routes->get('/produk/tambah', 'Produk::tambah', ['filter' => 'auth']);
 $routes->post('/produk/simpan', 'Produk::simpan', ['filter' => 'auth']);
@@ -28,3 +28,9 @@ $routes->get('/kategori/hapus/(:num)', 'Kategori::hapus/$1', ['filter' => 'auth'
 $routes->get('/barang-masuk', 'BarangMasuk::index', ['filter' => 'auth']);
 $routes->get('/barang-masuk/tambah', 'BarangMasuk::tambah', ['filter' => 'auth']);
 $routes->post('/barang-masuk/simpan', 'BarangMasuk::simpan', ['filter' => 'auth']);
+
+$routes->get('/barang-keluar', 'BarangKeluar::index', ['filter' => 'auth']);
+$routes->get('/barang-keluar/tambah', 'BarangKeluar::tambah', ['filter' => 'auth']);
+$routes->post('/barang-keluar/simpan', 'BarangKeluar::simpan', ['filter' => 'auth']);
+
+$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth']);
