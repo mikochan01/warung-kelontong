@@ -23,6 +23,10 @@ class Dashboard extends BaseController
             ->where('stok <=', 5)
             ->countAllResults();
 
+        $data['produkKritis'] = $produkModel
+            ->where('stok <=', 5)
+            ->findAll();
+
         return view('dashboard/index', $data);
     }
 }

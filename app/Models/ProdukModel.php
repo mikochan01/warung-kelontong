@@ -15,4 +15,5 @@ class ProdukModel extends Model
         'harga_jual',
         'stok'
     ];
+
 }

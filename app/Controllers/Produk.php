@@ -10,13 +10,20 @@ class Produk extends BaseController
     public function index()
     {
         $model = new ProdukModel();
+        $keyword = $this->request->getGet('keyword');
 
-        $data['produk'] = $model
+        $query = $model
             ->select('produk.*, kategori.nama_kategori')
-            ->join('kategori', 'kategori.id = produk.kategori_id', 'left')
-            ->findAll();
-        return view('produk/index', $data);
-    }
+            ->join('kategori', 'kategori.id = produk.kategori_id', 'left');
+
+        if ($keyword) {
+            $query->like('nama_produk', $keyword);
+        }
+
+            $data['produk'] = $query->paginate(5);
+            $data['pager'] = $model->pager;            
+            return view('produk/index', $data);
+        }
 
     public function tambah()
     {
