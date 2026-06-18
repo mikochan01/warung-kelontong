@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\ProdukModel;
 use App\Models\KategoriModel;
+use App\Models\BarangMasukModel;
+use App\Models\BarangKeluarModel;
 
 class Dashboard extends BaseController
 {
@@ -11,9 +13,13 @@ class Dashboard extends BaseController
     {
         $produkModel = new ProdukModel();
         $kategoriModel = new KategoriModel();
+        $barangMasukModel = new BarangMasukModel();
+        $barangKeluarModel = new BarangKeluarModel();
 
         $data['totalProduk'] = $produkModel->countAllResults();
         $data['totalKategori'] = $kategoriModel->countAllResults();
+        $data['totalMasuk'] = $barangMasukModel->countAllResults();
+        $data['totalKeluar'] = $barangKeluarModel->countAllResults();
 
         $data['totalStok'] = $produkModel
             ->selectSum('stok')

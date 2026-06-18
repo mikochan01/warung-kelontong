@@ -34,6 +34,12 @@
             </div>
         </div>
 
+        <div class="card mt-4 p-4">
+                <h4>Grafik Transaksi</h4>
+
+                <canvas id="transaksiChart"></canvas>
+        </div>
+
     </div>
 
 </div>
@@ -65,5 +71,23 @@
 </div>
 
 <?php endif; ?>
+
+<script>
+const ctx = document.getElementById('transaksiChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Barang Masuk', 'Barang Keluar'],
+        datasets: [{
+            label: 'Jumlah Transaksi',
+            data: [
+                <?= $totalMasuk ?>,
+                <?= $totalKeluar ?>
+            ]
+        }]
+    }
+});
+</script>
 
 <?= $this->include('layout/footer') ?>
