@@ -12,6 +12,9 @@ $routes->post('/produk/simpan', 'Produk::simpan', ['filter' => 'auth']);
 $routes->get('/produk/edit/(:num)', 'Produk::edit/$1', ['filter' => 'auth']);
 $routes->post('/produk/update/(:num)', 'Produk::update/$1', ['filter' => 'auth']);
 $routes->get('/produk/hapus/(:num)', 'Produk::hapus/$1', ['filter' => 'auth']);
+$routes->get('/produk/export', 'Produk::export', ['filter' => 'auth']);
+$routes->get('/produk/import', 'Produk::importForm', ['filter' => 'auth']);
+$routes->post('/produk/import', 'Produk::import', ['filter' => 'auth']);
 
 $routes->get('/login', 'Login::index');
 $routes->post('/login/auth', 'Login::auth');

@@ -7,6 +7,40 @@
    Tambah Barang Keluar
 </a>
 
+<form method="get" action="/barang-keluar" class="mb-3">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <label class="form-label">Tanggal Awal</label>
+            <input
+                type="date"
+                name="tanggal_awal"
+                class="form-control"
+                value="<?= $tanggalAwal ?? '' ?>"
+            >
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Tanggal Akhir</label>
+            <input
+                type="date"
+                name="tanggal_akhir"
+                class="form-control"
+                value="<?= $tanggalAkhir ?? '' ?>"
+            >
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <button class="btn btn-success w-100">
+                Filter
+            </button>
+        </div>
+
+    </div>
+
+</form>
+
 <?php if(session()->getFlashdata('error')): ?>
 
     <div class="alert alert-danger">

@@ -10,11 +10,21 @@ class BarangKeluar extends BaseController
     public function index()
     {
         $model = new BarangKeluarModel();
+        $tanggalAwal = $this->request->getGet('tanggal_awal');
+        $tanggalAkhir = $this->request->getGet('tanggal_akhir');
 
-        $data['barangKeluar'] = $model
+        $query = $model
             ->select('barang_keluar.*, produk.nama_produk')
-            ->join('produk', 'produk.id = barang_keluar.produk_id')
-            ->findAll();
+            ->join('produk', 'produk.id = barang_keluar.produk_id');
+        
+        if ($tanggalAwal && $tanggalAkhir) {
+            $query->where('tanggal >=', $tanggalAwal);
+            $query->where('tanggal <=', $tanggalAkhir);
+        }
+
+        $data['barangKeluar'] = $query->findAll();
+        $data['tanggalAwal'] = $tanggalAwal;
+        $data['tanggalAkhir'] = $tanggalAkhir;
 
         return view('barang_keluar/index', $data);
     }

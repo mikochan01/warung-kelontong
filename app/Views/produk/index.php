@@ -4,10 +4,24 @@
         Data Produk Warung
     </h2>
 
+    <div class="mb-3 d-flex gap-2">
+
     <a href="/produk/tambah"
-       class="btn btn-primary mb-3">
+       class="btn btn-primary">
         + Tambah Produk
     </a>
+
+    <a href="/produk/export"
+       class="btn btn-success">
+        Export Excel
+    </a>
+
+    <a href="/produk/import"
+       class="btn btn-info">
+        Import Excel
+    </a>
+
+</div>
 
     <form method="get" action="/produk" class="mb-3" id="searchForm">
 
@@ -33,6 +47,20 @@
 
 </form>
 
+<?php if(session()->getFlashdata('success')): ?>
+
+    <div class="alert alert-success alert-dismissible fade show">
+    <?= session()->getFlashdata('success') ?>
+
+    <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert">
+    </button>
+</div>
+
+<?php endif; ?>
+
     <table class="table table-bordered table-striped">
 
         <thead>
@@ -50,7 +78,7 @@
 
         <tbody>
 
-        <?php $no=1; ?>
+        <?php $no = 1 + ($perPage * ($currentPage - 1)); ?>
         <?php foreach($produk as $p): ?>
 
         <tr>
@@ -83,6 +111,7 @@
                    onclick="return confirm('Yakin hapus?')">
                     Hapus
                 </a>
+
             </td>
 
         </tr>
