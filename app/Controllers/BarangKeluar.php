@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\BarangKeluarModel;
 use App\Models\ProdukModel;
+use App\Services\InventoryService;
 
 class BarangKeluar extends BaseController
 {
@@ -32,36 +33,27 @@ class BarangKeluar extends BaseController
     {
         $produkModel = new ProdukModel();
         $data['produk'] = $produkModel->findAll();
-    return view('barang_keluar/tambah', $data);
+        return view('barang_keluar/tambah', $data);
     }
 
     public function simpan()
     {
-        $barangKeluarModel = new BarangKeluarModel();
-        $produkModel = new ProdukModel();
+    $inventoryService = new InventoryService();
 
-        $produkId = $this->request->getPost('produk_id');
-        $jumlah = $this->request->getPost('jumlah');
+    $produkId = $this->request->getPost('produk_id');
+    $jumlah = $this->request->getPost('jumlah');
 
-        $produk = $produkModel->find($produkId);
+    $result = $inventoryService->barangKeluar(
+        $produkId,
+        $jumlah
+    );
 
-        if ($jumlah > $produk['stok']) {
-            return redirect()
-                ->to('/barang-keluar')
-                ->with('error', 'Stok tidak mencukupi');
-        }
+    if (!$result['success']) {
+        return redirect()
+            ->to('/barang-keluar')
+            ->with('error', $result['message']);
+    }
 
-        $barangKeluarModel->save([
-            'produk_id' => $produkId,
-            'jumlah' => $jumlah
-        ]);
-
-        $stokBaru = $produk['stok'] - $jumlah;
-
-        $produkModel->update($produkId, [
-            'stok' => $stokBaru
-        ]);
-
-        return redirect()->to('/barang-keluar');
+    return redirect()->to('/barang-keluar');
     }
 }
