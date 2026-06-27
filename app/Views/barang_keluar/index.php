@@ -37,6 +37,12 @@
             </button>
         </div>
 
+        <div class="col-md-2 d-flex align-items-end">
+            <a href="/barang-keluar" class="btn btn-secondary w-100">
+                Reset
+            </a>
+        </div>
+
     </div>
 
 </form>

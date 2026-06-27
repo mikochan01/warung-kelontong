@@ -18,9 +18,8 @@ class BarangKeluar extends BaseController
             ->join('produk', 'produk.id = barang_keluar.produk_id');
         
         if ($tanggalAwal && $tanggalAkhir) {
-            $query->where('tanggal >=', $tanggalAwal);
-            $query->where('tanggal <=', $tanggalAkhir);
-        }
+            $query->where('tanggal >=', $tanggalAwal . ' 00:00:00');
+            $query->where('tanggal <=', $tanggalAkhir . ' 23:59:59');        }
 
         $data['barangKeluar'] = $query->findAll();
         $data['tanggalAwal'] = $tanggalAwal;
