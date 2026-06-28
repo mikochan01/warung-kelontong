@@ -6,33 +6,50 @@
 
     <div class="row mt-4">
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h5>Total Produk</h5>
                 <h2><?= $totalProduk ?></h2>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h5>Total Kategori</h5>
                 <h2><?= $totalKategori ?></h2>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h5>Total Stok</h5>
                 <h2><?= $totalStok ?></h2>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h5>Stok Menipis</h5>
                 <h2><?= $stokMenipis ?></h2>
             </div>
         </div>
+
+        <div class="col-md-4 mt-3">
+            <div class="card p-3">
+                <h5>Produk Terlaris</h5>
+
+                <?php if ($produkTerlaris): ?>
+                    <h4><?= $produkTerlaris['nama_produk'] ?></h4>
+                    <small>
+                        Total keluar:
+                        <?= $produkTerlaris['total_terjual'] ?>
+                    </small>
+                <?php else: ?>
+                    <small>Belum ada transaksi</small>
+                <?php endif; ?>
+
+            </div>
+
 
         <div class="card mt-4 p-4">
                 <h4>Grafik Transaksi</h4>

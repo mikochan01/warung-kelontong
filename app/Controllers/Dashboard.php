@@ -33,6 +33,13 @@ class Dashboard extends BaseController
             ->where('stok <=', 5)
             ->findAll();
 
+        $data['produkTerlaris'] = $barangKeluarModel
+            ->select('produk.nama_produk, SUM(barang_keluar.jumlah) as total_terjual')
+            ->join('produk', 'produk.id = barang_keluar.produk_id')
+            ->groupBy('barang_keluar.produk_id')
+            ->orderBy('total_terjual', 'DESC')
+            ->first();
+
         return view('dashboard/index', $data);
     }
 }

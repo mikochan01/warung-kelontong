@@ -29,7 +29,7 @@ class Login extends BaseController
                 'username' => $user['username']
             ]);
 
-            return redirect()->to('/produk');
+            return redirect()->to('/dashboard');
 
             session()->set([
                 'logged_in' => true,
