@@ -15,39 +15,49 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
-        <a href="/dashboard"
-           class="navbar-brand fw-bold">
-            🛒 Sistem Warung
-        </a>
+        <?php if(session()->get('logged_in')): ?>
 
-        <div class="d-flex align-items-center gap-2">
-
-            <a href="/produk"
-               class="btn btn-outline-light btn-sm">
-                Produk
+            <a href="/dashboard"
+               class="navbar-brand fw-bold">
+                🛒 Sistem Warung
             </a>
 
-            <a href="/kategori"
-               class="btn btn-outline-light btn-sm">
-                Kategori
-            </a>
+            <div class="d-flex align-items-center gap-2">
 
-            <a href="/barang-masuk"
-               class="btn btn-outline-light btn-sm">
-                Barang Masuk
-            </a>
+                <a href="/produk"
+                   class="btn btn-outline-light btn-sm">
+                    Produk
+                </a>
 
-            <a href="/barang-keluar"
-               class="btn btn-outline-light btn-sm">
-                Barang Keluar
-            </a>
+                <a href="/kategori"
+                   class="btn btn-outline-light btn-sm">
+                    Kategori
+                </a>
 
-            <a href="/logout"
-               class="btn btn-danger btn-sm">
-                Logout
-            </a>
+                <a href="/barang-masuk"
+                   class="btn btn-outline-light btn-sm">
+                    Barang Masuk
+                </a>
 
-        </div>
+                <a href="/barang-keluar"
+                   class="btn btn-outline-light btn-sm">
+                    Barang Keluar
+                </a>
+
+                <a href="/logout"
+                   class="btn btn-danger btn-sm">
+                    Logout
+                </a>
+
+            </div>
+
+        <?php else: ?>
+
+            <span class="navbar-brand fw-bold">
+                🛒 Sistem Warung
+            </span>
+
+        <?php endif; ?>
 
     </div>
 </nav>
