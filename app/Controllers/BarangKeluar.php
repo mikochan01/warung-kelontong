@@ -8,21 +8,29 @@ use App\Services\InventoryService;
 
 class BarangKeluar extends BaseController
 {
+    protected BarangKeluarModel $barangKeluarModel;
+    protected ProdukModel $produkModel;
+    protected InventoryService $inventoryService;
+
+    public function __construct()
+    {
+        $this->barangKeluarModel = new BarangKeluarModel();
+        $this->produkModel = new ProdukModel();
+        $this->inventoryService = new InventoryService();
+    }
+
     public function index()
     {
-        $model = new BarangKeluarModel();
         $tanggalAwal = $this->request->getGet('tanggal_awal');
         $tanggalAkhir = $this->request->getGet('tanggal_akhir');
 
-        $query = $model
-            ->select('barang_keluar.*, produk.nama_produk')
-            ->join('produk', 'produk.id = barang_keluar.produk_id');
-        
-        if ($tanggalAwal && $tanggalAkhir) {
-            $query->where('tanggal >=', $tanggalAwal . ' 00:00:00');
-            $query->where('tanggal <=', $tanggalAkhir . ' 23:59:59');        }
+        $data['barangKeluar'] =
+            $this->barangKeluarModel
+                ->getFilteredBarangKeluar(
+                    $tanggalAwal,
+                    $tanggalAkhir
+                );
 
-        $data['barangKeluar'] = $query->findAll();
         $data['tanggalAwal'] = $tanggalAwal;
         $data['tanggalAkhir'] = $tanggalAkhir;
 
@@ -31,29 +39,37 @@ class BarangKeluar extends BaseController
 
     public function tambah()
     {
-        $produkModel = new ProdukModel();
-        $data['produk'] = $produkModel->findAll();
+        $data['produk'] = $this->produkModel->findAll();        
+        
         return view('barang_keluar/tambah', $data);
     }
 
     public function simpan()
     {
-    $inventoryService = new InventoryService();
-
-    $produkId = $this->request->getPost('produk_id');
-    $jumlah = $this->request->getPost('jumlah');
-
-    $result = $inventoryService->barangKeluar(
-        $produkId,
-        $jumlah
-    );
-
-    if (!$result['success']) {
-        return redirect()
-            ->to('/barang-keluar')
-            ->with('error', $result['message']);
+        if (!$this->validate('barangKeluar')) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(
+                    'validation',
+                    $this->validator
+                );
     }
 
-    return redirect()->to('/barang-keluar');
+        $produkId = $this->request->getPost('produk_id');
+        $jumlah = $this->request->getPost('jumlah');
+
+        $result = $this->inventoryService->barangKeluar(
+            $produkId,
+            $jumlah
+        );
+
+        if (!$result['success']) {
+            return redirect()
+                ->to('/barang-keluar')
+                ->with('error', $result['message']);
+        }
+
+        return redirect()->to('/barang-keluar');
     }
 }

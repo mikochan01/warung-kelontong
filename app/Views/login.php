@@ -33,7 +33,7 @@
                                 type="text"
                                 name="username"
                                 class="form-control"
-                            >
+                                required>
 
                         </div>
 
@@ -45,7 +45,7 @@
                                 type="password"
                                 name="password"
                                 class="form-control"
-                            >
+                                required>
 
                         </div>
 

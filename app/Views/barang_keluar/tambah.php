@@ -1,5 +1,7 @@
 <?= $this->include('layout/header') ?>
 
+<?php $validation = session('validation'); ?>
+
 <div class="container mt-4">
 
 <h2>Tambah Barang Keluar</h2>
@@ -15,7 +17,7 @@
         <select
             name="produk_id" 
             id="produk"
-            class="form-control"
+            class="form-control <?= ($validation && $validation->hasError('produk_id')) ? 'is-invalid' : '' ?>"            
             required>
 
             <option value="">
@@ -27,6 +29,7 @@
             <option 
                 value="<?= $p['id'] ?>"
                 data-stok="<?= $p['stok'] ?>"
+                <?= old('produk_id') == $p['id'] ? 'selected' : '' ?>
             >
                 <?= $p['nama_produk'] ?>
             </option>
@@ -34,6 +37,12 @@
             <?php endforeach ?>
 
         </select>
+
+            <?php if ($validation && $validation->hasError('produk_id')): ?>
+                <div class="invalid-feedback d-block">
+                    <?= $validation->getError('produk_id') ?>
+                </div>
+            <?php endif; ?>
 
     </div>
 
@@ -47,8 +56,15 @@
             type="number"
             name="jumlah"
             id="jumlah"
-            class="form-control"
+            value="<?= old('jumlah') ?>"
+            class="form-control <?= ($validation && $validation->hasError('jumlah')) ? 'is-invalid' : '' ?>"
             >
+
+            <?php if ($validation && $validation->hasError('jumlah')): ?>
+                <div class="invalid-feedback d-block">
+                    <?= $validation->getError('jumlah') ?>
+                </div>
+            <?php endif; ?>
 
         <div id="warning" class="text-danger mt-2"></div>
 

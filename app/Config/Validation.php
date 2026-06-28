@@ -41,4 +41,22 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+
+    public array $barangKeluar = [
+    'produk_id' => [
+        'rules' => 'required|integer',
+        'errors' => [
+            'required' => 'Produk wajib dipilih.',
+            'integer'  => 'Produk tidak valid.'
+        ]
+    ],
+    'jumlah' => [
+        'rules' => 'required|integer|greater_than[0]',
+        'errors' => [
+            'required'      => 'Jumlah wajib diisi.',
+            'integer'       => 'Jumlah harus berupa angka.',
+            'greater_than'  => 'Jumlah minimal 1.'
+        ]
+    ]
+];
 }
